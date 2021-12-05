@@ -12,7 +12,7 @@ const ExpenseForm = () => {
 
   // When you update the state, you need to update all three properties.
   // So when you update the title, you need to pass in an object
-  // and use the spread operator so the other data doesn't get lost. 
+  // and use the spread operator so the other data doesn't get lost.
   // Then you can override the title key value pair.
   const titleChangeHandler = (event) => {
     setUserInput({
@@ -21,18 +21,30 @@ const ExpenseForm = () => {
     });
   };
 
+  // When state depends on the previous state, we need call the setUserInput function
+  // and pass in a function. This function receives the previous state snapshot.
+  // Then we return the new state snapshot, which is an object.
+  const titleChangeHandler = (event) => {
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredTitle: event.target.value,
+      };
+    });
+  };
+
   const amountChangeHandler = (event) => {
     setUserInput({
-        ...userInput,
-        enteredAmount: event.target.value,
-      });
+      ...userInput,
+      enteredAmount: event.target.value,
+    });
   };
 
   const dateChangeHandler = (event) => {
     setUserInput({
-        ...userInput,
-        enteredDate: event.target.value,
-      });
+      ...userInput,
+      enteredDate: event.target.value,
+    });
   };
 
   return (
